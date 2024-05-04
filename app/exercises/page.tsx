@@ -1,18 +1,30 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Post } from '../../components/post';
-import {dummy} from '../../components/dummy'
+import { Menu } from '@/components/menu';
+import { apiCall} from "@/lib/api";
 import { PostType } from '../../lib/types';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { dummy } from '@/components/dummy';
 
-const Exercises = () => {
+function Exercises(){
+
+  // const {data, isLoading} = useQuery({ queryKey: ['exer'], queryFn: apiCall })
+
+  const data = dummy
+
   return (
     <>
-    <div className='grid grid-cols-1 xl:grid-cols-5 gap-8 px-5 py-4 '>
+    <Menu/>
+    <div className='grid grid-cols-1 xl:grid-cols-6 gap-8 px-5 ml-[300px] py-4 '>
         {
-          dummy.map((item) =>{
+          // !isLoading &&
+          data.map((item: PostType) =>{
             return(
+            <>
             <Post item={item}/>
+            </>
             )
           })
         }
