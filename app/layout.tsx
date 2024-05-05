@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} overflow-hidden`}>
         <ReactQueryProvider>
         <Navbar />
         <main className="mt-[80px]">{children}</main>

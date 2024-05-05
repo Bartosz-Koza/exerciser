@@ -12,7 +12,7 @@ export const Post = ({ item }: { item: PostType }) => {
     <>
 
     <Link
-      href={"/details"}
+      href={`/${item.id}`}
       className="block max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1"
     >
       <div className="px-6 py-4">
