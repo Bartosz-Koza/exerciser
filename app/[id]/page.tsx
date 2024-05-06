@@ -9,19 +9,19 @@ import { motion } from "framer-motion";
 import React from "react";
 
 const Details = ({ params }: { params: { id: string } }) => {
-  // const { data, isLoading } = useQuery<PostType>({
-  //   queryKey: ["exer"],
-  //   queryFn: () => api_id(params.id),
-  // });
+  const { data, isLoading } = useQuery<PostType>({
+    queryKey: ["exer_detail"],
+    queryFn: () => api_id(params.id),
+  });
 
-  const data = detailsDummy;
+  // const data = detailsDummy;
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="container mx-auto px-4 py-8 flex flex-col md:flex-row"
+      className="container mx-auto px-4 py-8 flex flex-col md:flex-row mt-[11vh]"
     >
       <div className="md:w-1/2 flex flex-col justify-between md:mr-8">
         <motion.h1
@@ -30,21 +30,21 @@ const Details = ({ params }: { params: { id: string } }) => {
           transition={{ duration: 0.5 }}
           className="text-3xl md:text-4xl lg:text-5xl font-bold mb-10"
         >
-          {data.name}
+          {data?.name}
         </motion.h1>
         <div className="mb-8">
-          <h2 className="text-xl md:text-2xl font-semibold mb-2">
-            EQUIPMENT: <span className="text-black">{data.equipment}</span>
+          <h2 className="text-xl md:text-2xl font-bold mb-2">
+            Equipment: <span className="text-black">{data?.equipment}</span>
           </h2>
-          <h2 className="text-xl md:text-2xl font-semibold mb-2">
-            BODY PART: <span className="text-black-600">{data.bodyPart}</span>
+          <h2 className="text-xl md:text-2xl font-bold mb-2">
+            Body part: <span className="text-black-600">{data?.bodyPart}</span>
           </h2>
-          <h2 className="text-xl md:text-2xl font-semibold mb-2">
-            TARGET: <span className="text-black-600">{data.target}</span>
+          <h2 className="text-xl md:text-2xl font-bold mb-2">
+            Target: <span className="text-black-600">{data?.target}</span>
           </h2>
-          <h2 className="text-xl md:text-2xl font-semibold mb-2">
+          <h2 className="text-xl md:text-2xl font-bold mb-2">
             SECONDARY MUSCLES:{" "}
-            <span className="text-black-600">{data.secondaryMuscles}</span>
+            <span className="text-black">{data?.secondaryMuscles}</span>
           </h2>
         </div>
         <div>
@@ -55,7 +55,7 @@ const Details = ({ params }: { params: { id: string } }) => {
             transition={{ delay: 0.2 }}
             className="text-lg md:text-2xl leading-relaxed list-decimal"
           >
-            {data.instructions.map((item, index) => (
+            {data?.instructions.map((item, index) => (
               <motion.li
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -76,7 +76,7 @@ const Details = ({ params }: { params: { id: string } }) => {
           className=""
           height={500}
           width={600}
-          src={data.gifUrl}
+          src={data?.gifUrl}
           alt="Exercise GIF"
         />
       </div>
