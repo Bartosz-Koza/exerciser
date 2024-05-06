@@ -10,7 +10,7 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 100, duration: 0.5 }}
-      className="fixed top-0 bg-white w-full z-10 h-[80px] border-b-black border-b-2"
+      className="fixed top-0 bg-white w-full z-10 h-[80px] border-b-black shadow-md"
     >
       <nav className="flex items-center h-full justify-between px-[4vw] py-4">
         <motion.h1

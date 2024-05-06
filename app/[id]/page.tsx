@@ -53,7 +53,7 @@ const Details = ({ params }: { params: { id: string } }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-2xl leading-relaxed list-disc"
+            className="text-lg md:text-2xl leading-relaxed list-decimal"
           >
             {data.instructions.map((item, index) => (
               <motion.li

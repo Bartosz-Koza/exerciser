@@ -5,12 +5,12 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className=" overflow-hidden">
+    <div>
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col justify-center items-center h-screen text-center"
+      className="flex flex-col justify-center items-center h-[90vh] text-center"
     >
       <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 mb-12">
         Welcome to Exerciser!
