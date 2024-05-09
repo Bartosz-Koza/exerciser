@@ -8,3 +8,10 @@ export type PostType = {
     secondaryMuscles: string[];
     instructions: string[];
 }
+
+export type User ={
+    name:string
+    email:string
+    password:string
+}
+
