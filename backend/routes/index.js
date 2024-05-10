@@ -12,12 +12,12 @@ router.use(bodyParser.json());
 
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+  return jwt.sign(user, process.env.TOKEN_SECRET, { expiresIn: '15m' });
 }
 
 
 function generateRefreshToken(user) {
-  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+  return jwt.sign(user, process.env.TOKEN_SECRET);
 }
 
 
@@ -88,8 +88,57 @@ router.post('/api/login/', function(req, res, next) {
     const accessToken = generateAccessToken({ email: row.email });
     const refreshToken = generateRefreshToken({ email: row.email });
     res.json({
-      accessToken: accessToken,
-      refreshToken: refreshToken
+      access: accessToken,
+      refresh: refreshToken
+    });
+    console.log(accessToken,refreshToken)
+  });
+});
+
+//refresh token
+router.post('/api/token/refresh/', function(req, res, next) {
+  console.log(req.body)
+  const refreshToken = req.body.refresh;
+
+  jwt.verify(refreshToken, process.env.TOKEN_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ error: 'Invalid or expired refresh token' });
+    }
+
+    const accessToken = generateAccessToken({ email: user.email });
+    res.json({ accessToken: accessToken });
+  });
+});
+
+//whoAmI
+router.get('/api/whoami', function(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ error: 'Access token is required' });
+  }
+
+  jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ error: 'Invalid or expired token' });
+    }
+
+    const userEmail = decoded.email;
+
+    const sql = "SELECT * FROM user WHERE email = ?";
+    const params = [userEmail];
+
+    db.get(sql, params, (err, row) => {
+      if (err) {
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      if (!row) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      res.json({ user: row });
     });
   });
 });

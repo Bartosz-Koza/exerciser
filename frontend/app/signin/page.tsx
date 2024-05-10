@@ -3,11 +3,21 @@
 import React from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
 import { motion } from 'framer-motion';
+import { useMutation } from '@tanstack/react-query';
+import { login } from '@/lib/api';
+import { useRouter } from 'next/navigation';
 
 const Signin = () => {
 
+  const router = useRouter()
+
   const { register, handleSubmit } = useForm<any>()
-  const onSubmit: SubmitHandler<any> = (data) => {console.log(data)}
+  const onSubmit: SubmitHandler<any> = (data) => {mutation.mutate(data)}
+
+  const mutation = useMutation({
+    mutationFn: login,
+    onSuccess: () => router.push('/')
+  })
 
   return (
     <div className="flex items-center justify-center h-[90vh]">
