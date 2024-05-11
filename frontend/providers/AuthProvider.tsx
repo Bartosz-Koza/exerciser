@@ -35,7 +35,7 @@ export function logout() {
 export default function AuthProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: any;
 }) {
   const { isPending } = useQuery({
     queryKey: ["user"],
@@ -47,5 +47,7 @@ export default function AuthProvider({
     return <h1>loading</h1>;
   }
 
-  return children;
+  return (
+    children
+  );
 }

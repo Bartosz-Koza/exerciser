@@ -18,7 +18,7 @@ export default function Home() {
       <p className="text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-prose mb-12 px-6 md:px-12 lg:px-20">
         Ready to take control of your health? Exerciser provides you with a
         vast collection of exercises to help you achieve your fitness goals.
-        Whether you're a beginner or an experienced athlete, we've got you
+        Whether you&#39;re a beginner or an experienced athlete, we&#39;ve got you
         covered.
       </p>
       <Link href="/exercises">

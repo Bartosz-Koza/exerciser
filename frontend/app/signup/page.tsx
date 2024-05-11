@@ -2,12 +2,23 @@
 
 import React from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
+import { register as registerApi} from '@/lib/api';
 import { motion } from 'framer-motion';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { registerSchema, RegisterSchema } from '../../lib/types';
 
 const Register = () => {
 
+  const router = useRouter()
+
   const { register, handleSubmit } = useForm<any>()
-  const onSubmit: SubmitHandler<any> = (data) => {console.log(data)}
+  const onSubmit: SubmitHandler<RegisterSchema> = (data) => {mutation.mutate(data)}
+
+  const mutation = useMutation({
+    mutationFn: registerApi,
+    onSuccess: () => router.push('/')
+  })
 
   return (
     <div className="flex items-center justify-center h-[90vh]">

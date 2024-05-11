@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode"; // Adjusted import
 import { User, LoginSchema, registerSchema, DecodedJWT } from "./types";
 import { encode, decode } from "js-base64";
 import "core-js/stable/atob";
+import { RegisterSchema } from './types';
 
 global.atob = decode;
 
@@ -156,7 +157,7 @@ function isExpired(token: string): boolean {
 }
 
 export async function updateTokens(tokens: AuthTokens): Promise<AuthTokens> {
-  const { data } = await axios.post("/api/token/refresh/", tokens); 
+  const { data } = await axios.post("/api/token/refresh/", tokens);
   setTokens(data);
   return data;
 }
@@ -176,6 +177,7 @@ export function removeTokens() {
 }
 
 export async function resumeSession(): Promise<User | null> {
+  console.log(getTokens());
   if (getTokens() !== null) {
     return await whoAmI();
   }
@@ -211,7 +213,7 @@ export async function login(body: LoginSchema) {
   return await whoAmI();
 }
 
-export async function register(body: registerSchema) {
+export async function register(body: RegisterSchema) {
   await axios.post("/api/register/", body);
   return await login(body);
 }

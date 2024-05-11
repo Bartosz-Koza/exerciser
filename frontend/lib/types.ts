@@ -13,9 +13,11 @@ export type PostType = {
 }
 
 export type User ={
+    user: {
     name:string
     email:string
     password:string
+    }
 }
 
 export const loginSchema = z.object({
@@ -39,4 +41,4 @@ export type DecodedJWT = {
   
 
 export type LoginSchema = z.infer<typeof loginSchema>
-export type registerSchema = z.infer<typeof registerSchema>
+export type RegisterSchema = z.infer<typeof registerSchema>
