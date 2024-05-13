@@ -143,6 +143,78 @@ router.get('/api/whoami', function(req, res, next) {
   });
 });
 
+//favorites POST
+router.post('/api/fav/',function(req, res, next){
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ error: 'Access token is required' });
+  }
+
+  jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ error: 'Invalid or expired token' });
+    }
+
+    const userId = decoded.email
+
+    console.log(userId)
+
+    console.log(req.body.exer_id)
+
+    var data = {
+      exer_id: req.body.exer_id,
+      user_id: decoded.email
+    };
+
+    var sql ='INSERT INTO favorites (exer_id, user_id) VALUES (?,?)';
+    var params =[data.exer_id,data.user_id];
+    db.run(sql, params, function (err, result) {
+      if (err){
+        res.status(400).json({"error": err.message});
+        return;
+      }
+      res.json({
+        "message": result,
+      });
+    });
+  })
+})
+
+//favorites GET 
+router.get('/fav', function(req, res, next){
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ error: 'Access token is required' });
+  }
+
+  jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ error: 'Invalid or expired token' });
+    }
+
+    const userID = decoded.email;
+
+    const sql = "SELECT * FROM favorites WHERE user_id = ?";
+    const params = [userID];
+
+    db.get(sql, params, (err, row) => {
+      if (err) {
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      if (!row) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      res.json({ user: row });
+    });
+  });
+})
+
 router.get('/', function(req, res, next){
   res.send('home');
 });

@@ -13,7 +13,7 @@
     "axios": "^1.6.8",
     "base-64": "^1.0.0",
     "core-js": "^3.37.0",
-    "framer-motion": "^11.1.7",
+    "framer-motion": "^11.1.9",
     "jotai": "^2.8.0",
     "js-base64": "^3.7.7",
     "jwt-decode": "^4.0.0",
