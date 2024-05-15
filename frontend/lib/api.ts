@@ -23,7 +23,6 @@ export const api = axios.create({
 
 api.interceptors.request.use(async (config) => {
   let tokens = getTokens();
-  console.log(tokens);
   if (!tokens) {
     return config;
   }
@@ -177,7 +176,6 @@ export function removeTokens() {
 }
 
 export async function resumeSession(): Promise<User | null> {
-  console.log(getTokens());
   if (getTokens() !== null) {
     return await whoAmI();
   }
@@ -190,10 +188,6 @@ function setTokens(newTokens: AuthTokens) {
 }
 
 function getTokens(): AuthTokens | null {
-  console.log(
-    localStorage.getItem("refreshToken"),
-    localStorage.getItem("accessToken")
-  );
   const refresh = localStorage.getItem("refreshToken");
   if (refresh === null) {
     return null;
@@ -207,7 +201,6 @@ function getTokens(): AuthTokens | null {
 
 export async function login(body: LoginSchema) {
   const { data } = await axios.post("/api/login/", body);
-  console.log(data);
   setTokens(data);
 
   return await whoAmI();
@@ -216,4 +209,12 @@ export async function login(body: LoginSchema) {
 export async function register(body: RegisterSchema) {
   await axios.post("/api/register/", body);
   return await login(body);
+}
+
+export async function add_to_fav(exer_id: string) {
+  await api.post('/api/fav/',{exer_id: exer_id})
+}
+
+export async function fav_get() {
+  return await api.get('/fav')
 }

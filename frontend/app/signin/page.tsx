@@ -16,7 +16,7 @@ const Signin = () => {
 
   const mutation = useMutation({
     mutationFn: login,
-    onSuccess: () => router.push('/')
+    onSuccess: () => {router.push('/'), window.location.reload()}
   })
 
   return (

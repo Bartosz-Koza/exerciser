@@ -201,19 +201,21 @@ router.get('/fav', function(req, res, next){
     const sql = "SELECT * FROM favorites WHERE user_id = ?";
     const params = [userID];
 
-    db.get(sql, params, (err, row) => {
+    db.all(sql, params, (err, rows) => {
       if (err) {
         return res.status(500).json({ error: 'Internal server error' });
       }
 
-      if (!row) {
+      if (rows.length === 0) {
         return res.status(404).json({ error: 'User not found' });
       }
 
-      res.json({ user: row });
+      const userFavorites = rows.map(row => row.exer_id);
+      res.json({ user: userFavorites });
     });
   });
-})
+});
+
 
 router.get('/', function(req, res, next){
   res.send('home');
