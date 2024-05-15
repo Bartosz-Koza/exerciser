@@ -9,13 +9,18 @@ import { motion } from "framer-motion";
 import { Heart } from '../public/fav';
 import { useMutation } from '@tanstack/react-query';
 import { add_to_fav } from "@/lib/api";
+import { useUser } from '../providers/AuthProvider';
 
 export const Post = ({ item }: { item: PostType }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [fill, setFill] = useState<string>('white')
 
+  const user = useUser()
+
   const toggleFavorite = () => {
+    if(user){
     mutation.mutate(item.id)
+    }
   };
 
   const mutation = useMutation({

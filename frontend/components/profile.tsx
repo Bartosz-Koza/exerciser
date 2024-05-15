@@ -3,8 +3,6 @@ import profile from "../public/profile.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { logout, useUser } from "../providers/AuthProvider";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { fav_get, api_id } from "@/lib/api";
 
 const ProfilePic = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,28 +13,6 @@ const ProfilePic = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  const { data, status } = useQuery({
-    queryFn: fav_get,
-    queryKey: ["fav"],
-  });
-
-  if(status === 'success'){
-    getData()
-  }
-
-  function getData() {
-    data?.data.user.map(async (item: any) => {
-      try {
-        const data = await api_id(item);
-        setExerciseData(data);
-      } catch (error) {
-        console.log(error);
-      }
-    });
-  }
-
-  // console.log(test)
 
   return (
     <div className="relative">

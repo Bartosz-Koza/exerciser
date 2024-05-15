@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "../../providers/AuthProvider";
 import Image from "next/image";
 import profilePic from "../../public/profile.svg";
@@ -8,14 +8,42 @@ import { motion } from "framer-motion";
 import { dummy } from "@/components/dummy";
 import { Post } from "@/components/post";
 import arrow from '@/public/arrow.svg'
+import { useQuery } from "@tanstack/react-query";
+import { api_id, fav_get } from "@/lib/api";
+import { useRouter } from 'next/navigation';
 
 const Profile = () => {
-
   const [open, setOpen] = useState(false)
 
   const favorites = dummy;
 
   const user = useUser();
+  const router = useRouter()
+
+  if(!user){
+    router.push('/')
+  }
+
+  // const { data, status } = useQuery({
+  //   queryFn: fav_get,
+  //   queryKey: ["fav"],
+  //   staleTime: Infinity
+  // });
+
+  // if (status === "success") {
+  //   data.data.user.map(async (item, index) => {
+  //     try {
+  //       console.log(item)
+  //       const responseData = await api_id(item); 
+  //       console.log(`Data for item ${index}:`, responseData);
+  //     } catch (error) {
+  //       console.error(`Error fetching data for item ${item}:`, error);
+  //     }
+  //   });
+  // }
+  // useEffect(() => {
+  //   console.log(api_id('001'))
+  // })
 
   return (
     <div className="flex flex-col items-start  min-h-[90vh] py-8 px-4 overflow-hidden">
