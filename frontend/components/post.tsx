@@ -42,6 +42,7 @@ export const Post = ({ item }: { item: PostType }) => {
               src={item.gifUrl}
               alt="gif"
               className="w-full h-auto mb-4 rounded-md"
+              unoptimized
             />
             <div className="flex flex-col text-center items-center justify-between font-bold">
               <p className="text-base text-gray-700">Target: {item.target}</p>

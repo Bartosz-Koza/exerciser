@@ -7,43 +7,34 @@ import profilePic from "../../public/profile.svg";
 import { motion } from "framer-motion";
 import { dummy } from "@/components/dummy";
 import { Post } from "@/components/post";
-import arrow from '@/public/arrow.svg'
-import { useQuery } from "@tanstack/react-query";
-import { api_id, fav_get } from "@/lib/api";
-import { useRouter } from 'next/navigation';
+import arrow from "@/public/arrow.svg";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { apiCall, api_id, fav_get } from "@/lib/api";
+import { useRouter } from "next/navigation";
+import { PostType } from "@/lib/types";
 
 const Profile = () => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [dataArray, setDataArray] = useState<any>([]);
+  const queryClient = useQueryClient();
 
   const favorites = dummy;
+  let data_arr = [];
 
   const user = useUser();
-  const router = useRouter()
+  const router = useRouter();
 
-  if(!user){
-    router.push('/')
+  if (!user) {
+    router.push("/");
   }
 
-  // const { data, status } = useQuery({
-  //   queryFn: fav_get,
-  //   queryKey: ["fav"],
-  //   staleTime: Infinity
-  // });
+  const { data, status } = useQuery({
+    queryFn: fav_get,
+    queryKey: ["fav_data"],
+    staleTime: Infinity,
+  });
 
-  // if (status === "success") {
-  //   data.data.user.map(async (item, index) => {
-  //     try {
-  //       console.log(item)
-  //       const responseData = await api_id(item); 
-  //       console.log(`Data for item ${index}:`, responseData);
-  //     } catch (error) {
-  //       console.error(`Error fetching data for item ${item}:`, error);
-  //     }
-  //   });
-  // }
-  // useEffect(() => {
-  //   console.log(api_id('001'))
-  // })
+  const idMap = data?.data.user;
 
   return (
     <div className="flex flex-col items-start  min-h-[90vh] py-8 px-4 overflow-hidden">
@@ -55,6 +46,7 @@ const Profile = () => {
             width={300}
             height={300}
             objectFit="cover"
+            unoptimized
           />
         </div>
         <div>
@@ -63,29 +55,27 @@ const Profile = () => {
         </div>
       </div>
       <div>
-      <div className="flex items-center cursor-pointer" onClick={() => setOpen(!open)}>
-        <motion.div
-          initial={{ rotate: 0 }}
-          animate={{ rotate: open ? 90 : 0 }}
-          transition={{ duration: 0.3 }}
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={() => setOpen(!open)}
         >
-          <Image
-            src={arrow}
-            height={100}
-            width={50}
-            alt='arrow'
-          />
-        </motion.div>
-        <p className="text-4xl font-bold mb-4 ml-4">Favorites</p>
-      </div>
-      {open && (
-        <div className="grid grid-cols-5 gap-4">
-          {favorites.map((favorite, index) => (
-            <Post item={favorite}/>
-          ))}
+          <motion.div
+            initial={{ rotate: 0 }}
+            animate={{ rotate: open ? 90 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Image src={arrow} height={100} width={50} alt="arrow" />
+          </motion.div>
+          <p className="text-4xl font-bold mb-4 ml-4">Favorites</p>
         </div>
-      )}
-    </div>
+        {open && (
+          <div className="grid grid-cols-5 gap-4">
+            {favorites.map((favorite, index) => (
+              <Post item={favorite} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
