@@ -9,17 +9,14 @@ import { dummy } from "@/components/dummy";
 import { Post } from "@/components/post";
 import arrow from "@/public/arrow.svg";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { apiCall, api_id, fav_get } from "@/lib/api";
+import { apiCall, api_id, fav_get, login } from '@/lib/api';
 import { useRouter } from "next/navigation";
 import { PostType } from "@/lib/types";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
-  const [dataArray, setDataArray] = useState<any>([]);
-  const queryClient = useQueryClient();
 
   const favorites = dummy;
-  let data_arr = [];
 
   const user = useUser();
   const router = useRouter();
@@ -33,9 +30,7 @@ const Profile = () => {
     queryKey: ["fav_data"],
     staleTime: Infinity,
   });
-
-  const idMap = data?.data.user;
-
+  
   return (
     <div className="flex flex-col items-start  min-h-[90vh] py-8 px-4 overflow-hidden">
       <div className="flex items-start mb-4 w-[100vw] border-b-black border-solid border-b-2">
@@ -70,8 +65,8 @@ const Profile = () => {
         </div>
         {open && (
           <div className="grid grid-cols-5 gap-4">
-            {favorites.map((favorite, index) => (
-              <Post item={favorite} />
+            {data?.data.rows.map((favorite: any, index: any) => (
+              <Post item={JSON.parse(favorite.exer_data)} isFav={true}/>
             ))}
           </div>
         )}

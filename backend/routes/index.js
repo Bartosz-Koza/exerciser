@@ -161,15 +161,15 @@ router.post('/api/fav/',function(req, res, next){
 
     console.log(userId)
 
-    console.log(req.body.exer_id)
+    console.log(req.body.exer_data)
 
     var data = {
-      exer_id: req.body.exer_id,
+      exer_data: JSON.stringify(req.body.exer_data),
       user_id: decoded.email
     };
 
-    var sql ='INSERT INTO favorites (exer_id, user_id) VALUES (?,?)';
-    var params =[data.exer_id,data.user_id];
+    var sql ='INSERT INTO favorites (exer_data, user_id) VALUES (?,?)';
+    var params =[data.exer_data,data.user_id];
     db.run(sql, params, function (err, result) {
       if (err){
         res.status(400).json({"error": err.message});
@@ -210,8 +210,8 @@ router.get('/fav', function(req, res, next){
         return res.status(404).json({ error: 'User not found' });
       }
 
-      const userFavorites = rows.map(row => row.exer_id);
-      res.json({ user: userFavorites });
+      // const userFavorites = rows.map(row => row.exer_id);
+      res.json({ rows });
     });
   });
 });

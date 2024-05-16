@@ -52,7 +52,7 @@ function Exercises() {
           data.map((item: PostType) => {
             return (
               <>
-                <Post item={item} />
+                <Post item={item} isFav={false} />
               </>
             );
           })}

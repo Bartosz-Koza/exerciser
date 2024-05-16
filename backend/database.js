@@ -24,14 +24,12 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
                 db.run(insert, ["admin","admin@example.com",md5("admin123456")])
                 db.run(insert, ["user","user@example.com",md5("user123456")])
             }
-        }); 
-        
-        db.run(`CREATE TABLE IF NOT EXISTS favorites (
+        })
+
+        db.run(`CREATE TABLE favorites (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            exer_id CHAR(20),
-            user_id CHAR(20),
-            FOREIGN KEY (exer_id) REFERENCES exercises (id),
-            FOREIGN KEY (user_id) REFERENCES user (id)
+            exer_data JSON,
+            user_id CHAR(20)
             )`,
         (err) => {
             if (err) {

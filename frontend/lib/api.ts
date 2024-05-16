@@ -215,8 +215,8 @@ export async function register(body: RegisterSchema) {
   return await login(body);
 }
 
-export async function add_to_fav(exer_id: string) {
-  await api.post("/api/fav/", { exer_id: exer_id });
+export async function add_to_fav(exer_data: any) {
+  await api.post("/api/fav/", { exer_data: exer_data });
 }
 
 export async function fav_get() {

@@ -1,7 +1,7 @@
 "use client";
 
 import { PostType } from "@/lib/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import heart from "../public/fav.svg";
@@ -11,21 +11,27 @@ import { useMutation } from '@tanstack/react-query';
 import { add_to_fav } from "@/lib/api";
 import { useUser } from '../providers/AuthProvider';
 
-export const Post = ({ item }: { item: PostType }) => {
+export const Post = ({ item, isFav }: { item: PostType, isFav: boolean }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [fill, setFill] = useState<string>('white')
 
   const user = useUser()
 
   const toggleFavorite = () => {
-    if(user){
-    mutation.mutate(item.id)
+    if (user) {
+      mutation.mutate(item)
     }
   };
 
+  useEffect(() => {
+    if(isFav){
+      setFill('red')
+    }
+  },[])
+
   const mutation = useMutation({
     mutationFn: add_to_fav,
-    onSuccess:() => setFill('red')
+    onSuccess: () => setFill('white')
   })
 
   return (
@@ -52,14 +58,26 @@ export const Post = ({ item }: { item: PostType }) => {
             </div>
           </Link>
           <div>
-            <motion.button
-              onClick={toggleFavorite}
-              className={`flex items-center justify-center bg-white focus:outline-none`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Heart fill={fill.toString()}/>
-            </motion.button>
+            {
+              isFav ?
+                <motion.button
+                  onClick={toggleFavorite}
+                  className={`flex items-center justify-center bg-white focus:outline-none`}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Heart fill={fill.toString()} />
+                </motion.button>
+                :
+                <motion.button
+                  onClick={toggleFavorite}
+                  className={`flex items-center justify-center bg-white focus:outline-none`}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Heart fill={fill.toString()} />
+                </motion.button>
+            }
           </div>
         </div>
       </div>
