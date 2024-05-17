@@ -8,10 +8,10 @@ import heart from "../public/fav.svg";
 import { motion } from "framer-motion";
 import { Heart } from '../public/fav';
 import { useMutation } from '@tanstack/react-query';
-import { add_to_fav } from "@/lib/api";
+import { add_to_fav, delete_fav } from "@/lib/api";
 import { useUser } from '../providers/AuthProvider';
 
-export const Post = ({ item, isFav }: { item: PostType, isFav: boolean }) => {
+export const Post = ({ item, isFav,index }: { item: PostType, isFav: boolean,index: number }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [fill, setFill] = useState<string>('white')
 
@@ -23,15 +23,24 @@ export const Post = ({ item, isFav }: { item: PostType, isFav: boolean }) => {
     }
   };
 
+  const toggleDelete = () =>{
+    deleteFav.mutate(index)
+  }
+
   useEffect(() => {
     if(isFav){
       setFill('red')
     }
   },[])
+  
+  const deleteFav = useMutation({
+    mutationFn: delete_fav,
+    onSuccess: () => setFill('white')
+  })
 
   const mutation = useMutation({
     mutationFn: add_to_fav,
-    onSuccess: () => setFill('white')
+    onSuccess: () => setFill('red')
   })
 
   return (
@@ -61,7 +70,7 @@ export const Post = ({ item, isFav }: { item: PostType, isFav: boolean }) => {
             {
               isFav ?
                 <motion.button
-                  onClick={toggleFavorite}
+                  onClick={toggleDelete}
                   className={`flex items-center justify-center bg-white focus:outline-none`}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}

@@ -219,6 +219,11 @@ export async function add_to_fav(exer_data: any) {
   await api.post("/api/fav/", { exer_data: exer_data });
 }
 
+export async function delete_fav(id: any) {
+  await api.delete("/fav/delete/", { data: {fav_id: id} });
+}
+
 export async function fav_get() {
   return await api.get("/fav");
 }
+

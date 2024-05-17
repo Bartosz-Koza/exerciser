@@ -82,8 +82,8 @@ export const Menu = () => {
   return (
     <div className="max-w-[300px] fixed left-4rounded-lg overflow-hidden z-50 ">
       <div className="p-4">
-        <h1 className="text-lg font-bold mb-2">Search</h1>
-        <h1>Search by:</h1>
+        <h1 className=" text-4xl font-bold mb-4">Search</h1>
+        <h1 className="text-xl">Search by:</h1>
         <select
           value={select}
           onChange={(e: any) => {

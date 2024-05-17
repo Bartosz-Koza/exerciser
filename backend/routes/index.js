@@ -216,6 +216,36 @@ router.get('/fav', function(req, res, next){
   });
 });
 
+//favorites delet
+router.delete('/fav/delete/', function(req, res, next){
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ error: 'Access token is required' });
+  }
+
+  jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ error: 'Invalid or expired token' });
+    }
+
+    const userID = decoded.email;
+
+    const sql = " DELETE FROM favorites WHERE user_id = ? AND id = ?";
+    const params = [userID, req.body.fav_id];
+
+    db.all(sql, params, (err, rows) => {
+      if (err) {
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+      res.json({ 
+        'message': "succes"
+       });
+    });
+  })
+})
+
 
 router.get('/', function(req, res, next){
   res.send('home');

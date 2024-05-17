@@ -49,10 +49,10 @@ function Exercises() {
       <Menu />
       <div className="grid grid-cols-1 xl:grid-cols-6 gap-8 px-5 ml-[300px] py-4 ">
         {
-          data.map((item: PostType) => {
+          data.map((item: PostType, index) => {
             return (
               <>
-                <Post item={item} isFav={false} />
+                <Post item={item} isFav={false} index={index} />
               </>
             );
           })}

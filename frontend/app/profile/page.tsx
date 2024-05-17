@@ -28,7 +28,6 @@ const Profile = () => {
   const { data, status } = useQuery({
     queryFn: fav_get,
     queryKey: ["fav_data"],
-    staleTime: Infinity,
   });
   
   return (
@@ -65,8 +64,8 @@ const Profile = () => {
         </div>
         {open && (
           <div className="grid grid-cols-5 gap-4">
-            {data?.data.rows.map((favorite: any, index: any) => (
-              <Post item={JSON.parse(favorite.exer_data)} isFav={true}/>
+            {data?.data.rows.map((favorite: any, index: number) => (
+              <Post item={JSON.parse(favorite.exer_data)} isFav={true} index={favorite.id}/>
             ))}
           </div>
         )}
@@ -74,5 +73,5 @@ const Profile = () => {
     </div>
   );
 };
-
+  
 export default Profile;
