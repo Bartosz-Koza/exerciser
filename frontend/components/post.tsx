@@ -10,8 +10,9 @@ import { Heart } from '../public/fav';
 import { useMutation } from '@tanstack/react-query';
 import { add_to_fav, delete_fav } from "@/lib/api";
 import { useUser } from '../providers/AuthProvider';
+import { queryClient } from "@/providers/ReactQueryProvider";
 
-export const Post = ({ item, isFav,index }: { item: PostType, isFav: boolean,index: number }) => {
+export const Post =  ({ item, isFav,index }: { item: PostType, isFav: boolean,index: number }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [fill, setFill] = useState<string>('white')
 
@@ -23,14 +24,17 @@ export const Post = ({ item, isFav,index }: { item: PostType, isFav: boolean,ind
     }
   };
 
-  const toggleDelete = () =>{
+  const toggleDelete = async() =>{
     deleteFav.mutate(index)
   }
+
+
 
   useEffect(() => {
     if(isFav){
       setFill('red')
     }
+
   },[])
   
   const deleteFav = useMutation({
@@ -40,7 +44,7 @@ export const Post = ({ item, isFav,index }: { item: PostType, isFav: boolean,ind
 
   const mutation = useMutation({
     mutationFn: add_to_fav,
-    onSuccess: () => setFill('red')
+    onSuccess: () => setFill('red'),
   })
 
   return (

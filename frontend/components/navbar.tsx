@@ -4,9 +4,10 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Profile from "./profile";
-
+import { useUser } from "@/providers/AuthProvider";
 
 export default function Navbar() {
+  const user = useUser();
 
   return (
     <motion.div
@@ -47,8 +48,21 @@ export default function Navbar() {
               </p>
             </Link>
           </motion.li>
+          <motion.li
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="cursor-pointer"
+          >
+            {user && (
+              <Link href={"/profile"}>
+                <p className="text-black-600 text-xl hover:text-gray-800 transition-colors duration-300 font-bold">
+                  Favorites
+                </p>
+              </Link>
+            )}
+          </motion.li>
           <motion.li>
-            <Profile/>
+            <Profile />
           </motion.li>
         </ul>
       </nav>

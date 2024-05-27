@@ -17,7 +17,7 @@ const Register = () => {
 
   const mutation = useMutation({
     mutationFn: registerApi,
-    onSuccess: () => {router.push('/'), window.location.reload()}
+    onSuccess: () => {router.push('/')}
   })
 
   return (
