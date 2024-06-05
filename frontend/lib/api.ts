@@ -72,7 +72,7 @@ export async function apiCall() {
   };
 
     const response = await axios.request(options);
-    return response
+    return response.data
 }
 
 export async function api_id(id: string) {

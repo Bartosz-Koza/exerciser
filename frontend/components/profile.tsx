@@ -38,7 +38,7 @@ const ProfilePic = () => {
           </ul>
         ) : (
           <ul className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-xl">
-            <li className="px-4 py-2  hover:bg-gray-100gt">
+            <li className="px-4 py-2 hover:bg-gray-100">
               <Link href={"/profile"}>
                 <p>{user_data.user.name}</p>
               </Link>

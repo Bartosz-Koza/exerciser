@@ -42,14 +42,17 @@ function Exercises() {
   //   },
   // });
 
+  // console.log(data)
+
   const data = dummy
 
   return (
     <>
       <Menu />
       <div className="grid grid-cols-1 xl:grid-cols-6 gap-8 px-5 ml-[300px] py-4 ">
-        {
-          data.map((item: PostType, index) => {
+      {
+        // !isLoading &&
+          data.map((item: PostType, index: any) => {
             return (
               <>
                 <Post item={item} isFav={false} index={index} />

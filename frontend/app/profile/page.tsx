@@ -25,11 +25,12 @@ const Profile = () => {
     router.push("/");
   }
 
-  const { data } = useQuery({
-    queryFn: fav_get,
-    queryKey: ["fav_data"],
-    staleTime: Infinity
+  const { data, refetch } = useQuery({
+    queryKey: ['fav_data'],
+    queryFn: fav_get
   });
+
+
 
   return (
     <div className="flex flex-col items-start  min-h-[90vh] py-8 px-4 overflow-hidden">
