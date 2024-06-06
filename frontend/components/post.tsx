@@ -36,7 +36,7 @@ export const Post =  ({ item, isFav,index }: { item: PostType, isFav: boolean,in
   
   const deleteFav = useMutation({
     mutationFn: delete_fav,
-    onSuccess: () => {setFill('white'),queryClient.invalidateQueries({queryKey:['fav_data']});}
+    onSuccess: () => {setFill('white')}
   })
 
   const mutation = useMutation({

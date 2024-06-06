@@ -2,15 +2,19 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useUser } from "@/providers/AuthProvider";
 
 export default function Home() {
+
+  const user = useUser()
+
   return (
     <>
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col justify-center items-center h-[60vh] text-center"
+        className="flex flex-col justify-center items-center h-[50vh] text-center"
       >
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 mb-12">
           Welcome to Exerciser!
@@ -45,6 +49,8 @@ export default function Home() {
         </div>
       </div>
 
+      {
+      !user &&
       <footer className="bg-gray-800 text-white py-8">
         <div className="container mx-auto text-center">
           <p className="mb-4">Join our community and start your fitness journey today!</p>
@@ -53,6 +59,7 @@ export default function Home() {
           </Link>
         </div>
       </footer>
+      }
     </>
   );
 }

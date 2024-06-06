@@ -25,9 +25,9 @@ const Profile = () => {
     router.push("/");
   }
 
-  const { data, refetch } = useQuery({
-    queryKey: ['fav_data'],
-    queryFn: fav_get
+  const { data } = useQuery({
+    queryKey: ['fav_data', {type: 'active'}],
+    queryFn: fav_get,
   });
 
 
