@@ -8,11 +8,13 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "type": "module",
   "dependencies": {
     "@tanstack/react-query": "^5.34.1",
     "axios": "^1.6.8",
     "base-64": "^1.0.0",
     "core-js": "^3.37.0",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.1.9",
     "jotai": "^2.8.0",
     "js-base64": "^3.7.7",

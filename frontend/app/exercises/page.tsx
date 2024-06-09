@@ -23,35 +23,35 @@ function Exercises() {
   const [name] = useAtom(nameAtom);
   const [type] = useAtom(typeAtom);
 
-  // const { data, isLoading } = useQuery({
-  //   queryKey: ["exer", select, body ?? target ?? name ?? type],
-  //   queryFn: () => {
-  //     if (select == "name") {
-  //       return api_name(name);
-  //     }
-  //     if (select == "type") {
-  //       return api_type(type);
-  //     }
-  //     if (select == "target") {
-  //       return api_target(target);
-  //     }
-  //     if (select == "bodyPart") {
-  //       return api_body(body);
-  //     }
-  //     return apiCall();
-  //   },
-  // });
+  const { data, isLoading } = useQuery({
+    queryKey: ["exer", select, body ?? target ?? name ?? type],
+    queryFn: () => {
+      if (select == "name") {
+        return api_name(name);
+      }
+      if (select == "type") {
+        return api_type(type);
+      }
+      if (select == "target") {
+        return api_target(target);
+      }
+      if (select == "bodyPart") {
+        return api_body(body);
+      }
+      return apiCall();
+    },
+  });
 
   // console.log(data)
 
-  const data = dummy
+  // const data = dummy
 
   return (
     <>
       <Menu />
       <div className="grid grid-cols-1 xl:grid-cols-6 gap-8 px-5 ml-[300px] py-4 ">
       {
-        // !isLoading &&
+        !isLoading &&
           data.map((item: PostType, index: any) => {
             return (
               <>

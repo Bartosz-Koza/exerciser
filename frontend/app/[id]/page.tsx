@@ -15,7 +15,7 @@ const Details = ({ params }: { params: { id: string } }) => {
   // });
 
   const data = detailsDummy;
-
+ 
   return (
     <motion.div
       initial={{ opacity: 0 }}
