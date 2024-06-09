@@ -9,13 +9,13 @@ import { motion } from "framer-motion";
 import React from "react";
 
 const Details = ({ params }: { params: { id: string } }) => {
-  // const { data, isLoading } = useQuery<PostType>({
-  //   queryKey: ["exer_detail"],
-  //   queryFn: () => api_id(params.id),
-  // });
+  const { data, isLoading } = useQuery<PostType>({
+    queryKey: ["exer_detail"],
+    queryFn: () => api_id(params.id),
+  });
 
-  const data = detailsDummy;
- 
+  // const data = detailsDummy;
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
