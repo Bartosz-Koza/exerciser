@@ -151,7 +151,7 @@ export const Menu = () => {
         )}
         {select == "bodyPart" && (
           <>
-            <select value={bodyParts} onChange={(e:any) => {SetBody(e.target.value), console.log(body)}} className="w-full mb-2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+            <select value={body} onChange={(e:any) => {SetBody(e.target.value), console.log(body)}} className="w-full mb-2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
               <option value="" disabled selected>
                 Select Body Part
               </option>
@@ -159,10 +159,7 @@ export const Menu = () => {
                 <option value={part} key={index}>{part}</option>
               ))}
             </select>
-            <button onClick={() => {
-              setSelectA(select)
-              client.invalidateQueries({queryKey:['exer']})
-            }} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            <button onClick={() => {setSelectA(select), client.invalidateQueries({queryKey:['exer']})}} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
               Search
             </button>
           </>
