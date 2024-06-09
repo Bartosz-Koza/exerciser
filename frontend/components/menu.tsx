@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import {atom} from 'jotai'
 import { useAtom } from "jotai";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const nameAtom = atom('')
 export const typeAtom = atom('')
@@ -79,6 +80,12 @@ export const Menu = () => {
   const [target, setTarget] = useAtom(targetAtom)
   const [body, SetBody]= useAtom(bodyAtom)
 
+  const client = useQueryClient()
+
+  if(select === 'null'){
+    window.location.reload()
+  }
+
   return (
     <div className="max-w-[300px] fixed left-4rounded-lg overflow-hidden z-50 ">
       <div className="p-4">
@@ -97,6 +104,7 @@ export const Menu = () => {
           <option value="target">Target</option>
           <option value="bodyPart">Body Part</option>
         </select>
+        
         {select == "name" && (
           <>
             <input
@@ -106,7 +114,7 @@ export const Menu = () => {
               placeholder="Search by name"
               className="w-full mb-2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
             ></input>
-            <button onClick={() => setSelectA(select)} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            <button onClick={() => {setSelectA(select), client.invalidateQueries({queryKey:['exer']})}} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
               Search
             </button>
           </>
@@ -121,7 +129,7 @@ export const Menu = () => {
                 <option value={type} key={index}>{type}</option>
               ))}
             </select>
-            <button onClick={() => setSelectA(select)} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            <button onClick={() => {setSelectA(select), client.invalidateQueries({queryKey:['exer']})}} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
               Search
             </button>
           </>
@@ -136,7 +144,7 @@ export const Menu = () => {
                 <option value={target} key={index}>{target}</option>
               ))}
             </select>
-            <button onClick={() => setSelectA(select)} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            <button onClick={() => {setSelectA(select), client.invalidateQueries({queryKey:['exer']})}} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
               Search
             </button>
           </>
@@ -151,7 +159,10 @@ export const Menu = () => {
                 <option value={part} key={index}>{part}</option>
               ))}
             </select>
-            <button onClick={() => setSelectA(select)} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            <button onClick={() => {
+              setSelectA(select)
+              client.invalidateQueries({queryKey:['exer']})
+            }} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
               Search
             </button>
           </>

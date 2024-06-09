@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import profile from "../public/profile.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +20,16 @@ const ProfilePic = () => {
   return (
     <div className="relative">
       <div onClick={toggleMenu} className="cursor-pointer">
-        <Image src={profile} alt="profile pic" height={80} width={80} />
+        {
+        !user_data ?(
+        <Image src={profile} alt="profile pic" height={80} width={80} /> 
+        ):
+        (
+          <div className=" bg-black w-14 h-14 rounded-full text-center text-white flex text-3xl items-center justify-center">
+            {user_data.user.name.slice(0,1)}
+          </div>
+        )
+      }
       </div>
       {isMenuOpen &&
         (!user_data ? (
@@ -41,11 +50,6 @@ const ProfilePic = () => {
             <li className="px-4 py-2 hover:bg-gray-100">
               <Link href={"/profile"}>
                 <p>{user_data.user.name}</p>
-              </Link>
-            </li>
-            <li className="px-4 py-2 hover:bg-gray-100">
-              <Link href="/signup">
-                <p>Favorites</p>
               </Link>
             </li>
             <li className="px-4 py-2 hover:bg-gray-100">
