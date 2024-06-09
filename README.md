@@ -16,7 +16,6 @@ Exerciser is a web application that provides a comprehensive database of exercis
 - **Search Functionality**: Easily search for specific exercises based on different criteria.
 - **Favorites**: Add exercises to your favorites for quick access.
 - **User Authentication**: Sign up and log in to manage your profile and favorite exercises.
-- **Responsive Design**: Accessible on both desktop and mobile devices.
 
 ## Installation
 
