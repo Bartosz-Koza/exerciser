@@ -1,55 +1,40 @@
-Exerciser
+# Exerciser
 
-Overview
+Exerciser is a web application that provides a comprehensive database of exercises, allowing users to search for exercises, add them to their favorites, and manage their profiles through a sign-in and login system. The frontend is built using Next.js, and the backend is powered by Express.js.
 
-Exerciser is a web application that provides a comprehensive exercise database with features to empower your fitness journey.
+## Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
 
-Features
+## Features
 
-    Exercise Database: Explore a vast collection of exercises, categorized and searchable for easy navigation.
-    Favorites: Personalize your workout routine by adding exercises to your favorites list for quick access.
-    User Authentication: Securely sign up and log in to manage your favorites and potentially track progress (future implementation).
+- **Exercise Database**: Browse a wide variety of exercises with detailed information.
+- **Search Functionality**: Easily search for specific exercises based on different criteria.
+- **Favorites**: Add exercises to your favorites for quick access.
+- **User Authentication**: Sign up and log in to manage your profile and favorite exercises.
+- **Responsive Design**: Accessible on both desktop and mobile devices.
 
-Technology Stack
+## Installation
 
-    Frontend: Next.js (React framework)
-    Backend: Express.js (Node.js framework)
+**Backend**
 
-Installation
+Navigate to the backend directory and install dependencies:
 
-    Clone the Repository:
-    Bash
-
-    git clone https://github.com/your-username/exerciser.git
-
-    Używaj kodu z rozwagą.
-
-Install Dependencies:
-Bash
-
-cd fronted/backend
+cd backend
 npm install
 
-Getting Started
+**Frontend**
 
-    Environment Variables:
-        Create a .env.local file at the root of the project (exclude from version control).
-        Define environment variables (e.g., database connection string, API keys).
+Navigate to the frontend directory and install dependencies:
 
-    Database Setup:
-        Refer to the specific documentation for your chosen database to set it up.
-        Configure database connection details in your .env.local file.
+cd frontend
+npm install
 
-    Development Server:
-        Start the development server:
-        Bash
+Ensure you have the following installed:
 
-        npm run dev
-
-        Access the application in your browser, usually at http://localhost:3000/.
-
-Usage
-
-    Search for exercises using the provided search functionality.
-    Add exercises to your favorites list for convenient access during workouts.
-    (Future) Sign up and log in to manage favorites and potentially track progress.
+- Node.js
+- npm (Node Package Manager)
