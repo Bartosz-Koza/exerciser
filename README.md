@@ -20,19 +20,17 @@ Exerciser is a web application that provides a comprehensive database of exercis
 
 ## Installation
 
-**Backend**
-
-Navigate to the backend directory and install dependencies:
-
+**Backend:**
+```
 cd backend
 npm install
+```
 
-**Frontend**
-
-Navigate to the frontend directory and install dependencies:
-
+**Frontend:**
+```
 cd frontend
 npm install
+```
 
 Ensure you have the following installed:
 
