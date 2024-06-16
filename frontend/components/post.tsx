@@ -32,7 +32,7 @@ export const Post =  ({ item, isFav,index }: { item: PostType, isFav: boolean,in
     if(isFav){
       setFill('red')
     }
-  },[])
+  },[isFav])
   
   const deleteFav = useMutation({
     mutationFn: delete_fav,

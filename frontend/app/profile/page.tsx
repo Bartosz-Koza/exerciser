@@ -70,6 +70,7 @@ const Profile = () => {
               if (favorite) {
                 return(
                 <Post
+                  key={index}
                   item={JSON.parse(favorite.exer_data)}
                   isFav={true}
                   index={favorite.id}
