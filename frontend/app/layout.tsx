@@ -7,8 +7,15 @@ import AuthProvider from "@/providers/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "exerciser",
-  description: "exercising website",
+  title: "Exerciser",
+  description: "Website that will help you exercise",
+  icons: {
+    icon: [
+      {
+        url: "./favicon.png"
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
