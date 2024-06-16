@@ -6,6 +6,7 @@ import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { User } from "@/lib/types";
 import loading from '../public/loading.gif'
 import Image from "next/image";
+import Loader from "@/components/Loader";
 
 export function useUser() {
   const { data } = useSuspenseQuery({
@@ -46,7 +47,7 @@ export default function AuthProvider({
   });
 
   if (isPending) {
-    return (<div className="flex justify-center items-center h-screen"><Image src={loading} height={500} width={500} alt="loading"/></div>)
+    return <Loader/>
   }
 
   return (
