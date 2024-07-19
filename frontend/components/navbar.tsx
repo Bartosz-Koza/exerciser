@@ -4,16 +4,23 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Profile from "./profile";
+import Image from "next/image";
 import { useUser } from "@/providers/AuthProvider";
+import ham from '../public/ham.svg'
 
 export default function Navbar() {
   const user = useUser();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   return (
     <motion.div
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 100, duration: 0.5 }}
+      transition={{ type: 'spring', stiffness: 100, duration: 0.5 }}
       className="fixed top-0 bg-white w-full z-10 h-[80px] border-b-black shadow-md"
     >
       <nav className="flex items-center h-full justify-between px-[4vw] py-4">
@@ -25,13 +32,27 @@ export default function Navbar() {
         >
           EXERCISER
         </motion.h1>
-        <ul className="lg:flex flex items-center lg:flex-row flex-col lg:gap-10 gap-5 lg:static absolute lg:w-auto md:w-[45vw] sm:w-[55vw] w-[90vw] rounded-3xl lg:inset-0 right-[5vw] top-20 lg:p-0 p-20 bg-white lg:shadow-none shadow-lg">
+        <div className="lg:hidden">
+          <button onClick={toggleMenu} className="focus:outline-none">
+          <Image
+          src={ham}
+          alt="ham"
+          width={50}
+          height={50}
+          />
+          </button>
+        </div>
+        <ul
+          className={`lg:flex flex items-center lg:flex-row flex-col lg:gap-10 gap-5 lg:static absolute lg:w-auto md:w-[45vw] sm:w-[55vw] w-[90vw] rounded-3xl lg:inset-0 right-[5vw] top-20 lg:p-0 p-20 bg-white lg:shadow-none shadow-lg ${
+            menuOpen ? 'block' : 'hidden'
+          }`}
+        >
           <motion.li
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             className="cursor-pointer"
           >
-            <Link href={"/"}>
+            <Link href="/">
               <p className="text-black-600 text-xl hover:text-gray-800 transition-colors duration-300 font-bold">
                 Home
               </p>
@@ -42,25 +63,25 @@ export default function Navbar() {
             whileTap={{ scale: 0.9 }}
             className="cursor-pointer"
           >
-            <Link href={"/exercises"}>
+            <Link href="/exercises">
               <p className="text-black-600 text-xl hover:text-gray-800 transition-colors duration-300 font-bold">
                 Exercises
               </p>
             </Link>
           </motion.li>
-          <motion.li
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="cursor-pointer"
-          >
-            {user && (
-              <Link href={"/profile"}>
+          {user && (
+            <motion.li
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="cursor-pointer"
+            >
+              <Link href="/profile">
                 <p className="text-black-600 text-xl hover:text-gray-800 transition-colors duration-300 font-bold">
                   Favorites
                 </p>
               </Link>
-            )}
-          </motion.li>
+            </motion.li>
+          )}
           <motion.li>
             <Profile />
           </motion.li>
